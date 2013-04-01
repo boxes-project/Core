@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AD09CFC-1937-439B-9A2F-1C068C0BB2D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Boxes</RootNamespace>
+    <AssemblyName>Boxes.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Boxes.Core.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Boxes.Core.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyReference.cs" />
+    <Compile Include="Discovering\ParrallelPackageScanner.cs" />
+    <Compile Include="Exceptions\MissingManifestException.cs" />
+    <Compile Include="Exceptions\XmlManifestNotSupportedException.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Loading\DefaultLoader.cs" />
+    <Compile Include="Loading\ILoader.cs" />
+    <Compile Include="Dependencies\DependencyMatrix.cs" />
+    <Compile Include="Dependencies\DependencyModule.cs" />
+    <Compile Include="Discovering\IPackageScanner.cs" />
+    <Compile Include="Loading\IsolatedLoader.cs" />
+    <Compile Include="Loading\LoaderBase.cs" />
+    <Compile Include="Loading\SeperateAppDomainLoader.cs" />
+    <Compile Include="Exceptions\MissingImportsException.cs" />
+    <Compile Include="PackageRegistry.cs" />
+    <Compile Include="Discovering\PackageScanner.cs" />
+    <Compile Include="ScanContext.cs" />
+    <Compile Include="FileScanning\File.cs" />
+    <Compile Include="FileScanning\IScanner.cs" />
+    <Compile Include="FileScanning\OneDeepDiectoryScanner.cs" />
+    <Compile Include="Tasks\AssemblyPreLoadTask.cs" />
+    <Compile Include="Tasks\FileTaskBase.cs" />
+    <Compile Include="Tasks\IBoxesTask.cs" />
+    <Compile Include="Manifest.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Package.cs" />
+    <Compile Include="Tasks\PipilineExecutor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileScanning\DirectoryScanner.cs" />
+    <Compile Include="Tasks\TaskRunner.cs" />
+    <Compile Include="Tasks\TxtManifestTask.cs" />
+    <Compile Include="Tasks\XmlManifest2012Reader.cs" />
+    <Compile Include="Tasks\XmlManifestTask.cs" />
+    <Compile Include="Tasks\XmlManifestReader.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="BoxesManifest.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

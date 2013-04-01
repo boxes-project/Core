@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95D7412C-01C9-4BB8-962B-FEEAEE3F0303}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Boxes.Test</RootNamespace>
+    <AssemblyName>Boxes.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContinousUseageTests.cs" />
+    <Compile Include="DefaultLoaderDependencyTests.cs" />
+    <Compile Include="IsolatedLoaderDependencyTests.cs" />
+    <Compile Include="ModuleTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleTests.cs" />
+    <Compile Include="TestsActInIsolationTests.cs" />
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Boxes.Core\Boxes.Core.csproj">
+      <Project>{6ad09cfc-1937-439b-9a2f-1c068c0bb2d3}</Project>
+      <Name>Boxes.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Boxes.Test.Core\Boxes.Test.Core.csproj">
+      <Project>{e94a4224-06fa-4a13-ae5c-b660fce87fa4}</Project>
+      <Name>Boxes.Test.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Box1\Test.Box1.csproj">
+      <Project>{cc2cabbb-39df-462a-80e2-9e8e131f399c}</Project>
+      <Name>Test.Box1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Box2\Test.Box2.csproj">
+      <Project>{f3db3830-4760-402d-b2e3-95841e50bc7a}</Project>
+      <Name>Test.Box2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Box3_1\Test.Box3_1.csproj">
+      <Project>{b11a3088-c91d-4708-9faa-aa932c716140}</Project>
+      <Name>Test.Box3_1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Box4_5i\Test.Box4_5i.csproj">
+      <Project>{aba0eb27-814f-44d5-b187-07ee6541a677}</Project>
+      <Name>Test.Box4_5i</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Box5_6_1\Test.Box5_6_1.csproj">
+      <Project>{ae058b2c-3aff-41f3-a9b1-8eedd0eb947c}</Project>
+      <Name>Test.Box5_6_1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test.Box6_2_1\Test.Box6_2_1.csproj">
+      <Project>{122fe03e-b7a6-4c92-8584-f96ab7779005}</Project>
+      <Name>Test.Box6_2_1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

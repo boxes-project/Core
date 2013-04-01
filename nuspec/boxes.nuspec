@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Boxes.Core</id>
+        <version>0.0.0</version>
+        <title>Boxes Core</title>
+        <authors>David Rundle</authors>
+        <owners>dbones.co.uk</owners>
+        <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+        <projectUrl>https://github.com/boxes-project</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Boxes is a package discovery and isolation framework for building compositional applications using the .NET Framework.</description>
+        <summary>Boxes is a package discovery and isolation framework for building compositional applications using the .NET Framework.</summary>
+        <copyright />
+        <language>es-US</language>
+        <tags>Composition Plugin Module Modular Package Bundle Isolated</tags>
+    </metadata>
+</package>

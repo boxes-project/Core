@@ -1,0 +1,8 @@
+﻿<manifest xmlns="http://schemas.dbones.co.uk/developer/boxes/2012">
+  <name>Test.Box2</name>
+  <version>1.0</version>
+  <description>Exmaple box</description>
+  <exports>
+    <assembly name ="Test.Box2" />
+  </exports>
+</manifest>
