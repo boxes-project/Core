@@ -81,7 +81,7 @@ namespace Boxes.Test
 #if DEBUG
             binFolder = "Debug";
 #endif
-#if RELEASE
+#if !DEBUG
             binFolder = "Release";
 #endif
 
