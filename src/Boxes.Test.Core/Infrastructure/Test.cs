@@ -17,6 +17,7 @@ namespace Boxes.Test.Infrastructure
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Text;
 
     [Serializable]
@@ -61,6 +62,8 @@ namespace Boxes.Test.Infrastructure
         private Action<Context<T>> _teardown;
         private int count = 1;
 
+        private Exception exception;
+
         public Test()
         {
             _asserts = new Dictionary<string, Func<Context<T>, bool>>();
@@ -83,6 +86,25 @@ namespace Boxes.Test.Infrastructure
             _asserts.Add(string.Format("Assetion: [{0}]", count++), assert);
         }
 
+        public void AssertException<TException>(Func<Context<T>, Exception, bool> assert) where TException : Exception
+        {
+            Func<Context<T>, bool> exceptionAssert = ctx =>
+            {
+                if (this.exception == null || !(exception is TException))
+                {
+                    return false;
+                }
+                var result = assert(ctx, this.exception);
+                //remove the exception if it was expected
+                if (result)
+                {
+                    this.exception = null;
+                }
+                return result;
+            };
+            _asserts.Add(string.Format("Exception Assetion: [{0}]", count++), exceptionAssert);
+        }
+
         public void Assert(string name, Func<Context<T>, bool> assert)
         {
             _asserts.Add(string.Format("Assetion: [{0}], {1}", count++, name), assert);
@@ -98,11 +120,21 @@ namespace Boxes.Test.Infrastructure
         {
             Debug.WriteLine("executing in " + AppDomain.CurrentDomain.FriendlyName);
             Context<T> context = _arrange();
-            _action(context);
+
+            try
+            {
+                _action(context);
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
+
+            
             foreach (var assert in _asserts)
             {
                 var passed = false;
-                string exception = "";
+                string exceptionMessage = "";
                 try
                 {
                     //var expression = SutVisitor.Apply(assert, Context);
@@ -112,7 +144,7 @@ namespace Boxes.Test.Infrastructure
                 catch (Exception ex)
                 {
                     passed = false;
-                    exception = Environment.NewLine + ex.ToString();
+                    exceptionMessage = Environment.NewLine + ex;
                 }
 
                 if (passed)
@@ -121,8 +153,13 @@ namespace Boxes.Test.Infrastructure
                 }
                 else
                 {
-                    FailedAssertions.Add(assert.Key + exception);
+                    FailedAssertions.Add(assert.Key + exceptionMessage);
                 }
+            }
+
+            if (exception != null)
+            {
+                FailedAssertions.Add("Unhandled Exception: " + Environment.NewLine + exception);
             }
 
             if (_teardown != null)

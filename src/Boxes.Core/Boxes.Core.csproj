@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AssemblyReference.cs" />
     <Compile Include="Discovering\ParrallelPackageScanner.cs" />
+    <Compile Include="Exceptions\CircularDependencyException.cs" />
+    <Compile Include="Exceptions\DuplicuteModuleException.cs" />
     <Compile Include="Exceptions\MissingManifestException.cs" />
     <Compile Include="Exceptions\XmlManifestNotSupportedException.cs" />
     <Compile Include="Extensions.cs" />

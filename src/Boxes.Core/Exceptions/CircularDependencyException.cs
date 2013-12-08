@@ -1,4 +1,4 @@
-// Copyright 2012 - 2013 dbones.co.uk
+﻿// Copyright 2012 - 2013 dbones.co.uk
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,22 +18,21 @@ namespace Boxes.Exceptions
     using System.Text;
 
     /// <summary>
-    /// raise this when there are missing import dependencies
+    /// Denotes a circular dependency between packages/modules
     /// </summary>
-    public class MissingImportsException : Exception
+    public class CircularDependencyException : Exception
     {
         /// <summary>
-        /// Dependencies not present
+        /// modules which have a circular dependency
         /// </summary>
-        public IEnumerable<Module> DependenciesNotPresent { get; private set; }
+        public IEnumerable<Package> Packages { get; private set; }
 
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="dependenciesNotPresent">the missing dependencies</param>
-        public MissingImportsException(IEnumerable<Module> dependenciesNotPresent)
+        public CircularDependencyException(IEnumerable<Package> packages)
         {
-            DependenciesNotPresent = dependenciesNotPresent;
+            Packages = packages;
         }
 
         public override string Message
@@ -47,13 +46,15 @@ namespace Boxes.Exceptions
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("missing the following import dependencies");
-            foreach (var module in DependenciesNotPresent)
+            sb.AppendLine("The following Packages have a circular dependency");
+            foreach (var packages in Packages)
             {
-                sb.AppendLine(module.ToString());
+                sb.AppendLine(packages.ToString());
             }
 
             return sb.ToString();
         }
+
+
     }
 }

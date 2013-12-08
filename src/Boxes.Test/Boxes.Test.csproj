@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyExceptionTests.cs" />
     <Compile Include="ContinousUseageTests.cs" />
     <Compile Include="DefaultLoaderDependencyTests.cs" />
     <Compile Include="IsolatedLoaderDependencyTests.cs" />

@@ -1,4 +1,4 @@
-// Copyright 2012 - 2013 dbones.co.uk
+﻿// Copyright 2012 - 2013 dbones.co.uk
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,22 +18,27 @@ namespace Boxes.Exceptions
     using System.Text;
 
     /// <summary>
-    /// raise this when there are missing import dependencies
+    /// A module is being exported by 2 packages
     /// </summary>
-    public class MissingImportsException : Exception
+    public class DuplicuteModuleException : Exception
     {
         /// <summary>
-        /// Dependencies not present
+        /// modules which have a circular dependency
         /// </summary>
-        public IEnumerable<Module> DependenciesNotPresent { get; private set; }
+        public IEnumerable<Package> Packages { get; private set; }
+
+        /// <summary>
+        /// Module which is being exported twice
+        /// </summary>
+        public Module Module { get; private set; }
 
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="dependenciesNotPresent">the missing dependencies</param>
-        public MissingImportsException(IEnumerable<Module> dependenciesNotPresent)
+        public DuplicuteModuleException(IEnumerable<Package> packages, Module module)
         {
-            DependenciesNotPresent = dependenciesNotPresent;
+            Packages = packages;
+            Module = module;
         }
 
         public override string Message
@@ -47,13 +52,15 @@ namespace Boxes.Exceptions
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("missing the following import dependencies");
-            foreach (var module in DependenciesNotPresent)
+            sb.AppendLine("The following Packages");
+            foreach (var packages in Packages)
             {
-                sb.AppendLine(module.ToString());
+                sb.AppendLine(packages.ToString());
             }
-
+            sb.AppendLine("Both export: " + Module.Name);
             return sb.ToString();
         }
+
+
     }
 }

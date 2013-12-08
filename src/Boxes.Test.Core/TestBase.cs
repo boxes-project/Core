@@ -129,6 +129,36 @@ namespace Boxes.Test
         }
 
         /// <summary>
+        /// Assert an exception being thrown
+        /// </summary>
+        /// <typeparam name="TException">the exception type</typeparam>
+        /// <param name="assert">any additional things to assert, ie you can look at the message depending on the context</param>
+        protected void AssertException<TException>(Func<Context<T>, Exception, bool> assert) where TException : Exception
+        {
+            _test.AssertException<TException>(assert);       
+        }
+
+        /// <summary>
+        /// Assert an exception being thrown
+        /// </summary>
+        /// <typeparam name="TException">the exception type</typeparam>
+        protected void AssertException<TException>() where TException : Exception
+        {
+            _test.AssertException<TException>((context, exception) => true);
+        }
+
+        /// <summary>
+        /// Assert an exception being thrown
+        /// </summary>
+        /// <typeparam name="TException">the exception type</typeparam>
+        /// <param name="errorMessage">the error message to assert for</param>
+        protected void AssertException<TException>(string errorMessage) where TException : Exception
+        {
+            _test.AssertException<TException>((context, exception) => exception.Message.Equals(errorMessage));
+        }
+
+
+        /// <summary>
         /// clean up any thing from the test, inside the other app domain
         /// </summary>
         /// <param name="teardown"></param>
