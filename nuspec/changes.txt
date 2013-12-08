@@ -1,3 +1,9 @@
+0.4.x
+==============
+Fix #4 - throw exception for circular dependency
+Throw exception for a module being exposed by 2 packages
+Unit testing framework supports AssertException
+
 0.3.x
 ==============
 version number sync
